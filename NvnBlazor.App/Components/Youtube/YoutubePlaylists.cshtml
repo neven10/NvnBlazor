@@ -1,0 +1,20 @@
+﻿@inherits YoutubePlaylistsModel
+
+<div class="d-flex flex-fill ">
+    @foreach (var s in YoutubeViewModelsList)
+    {
+        <a href="@s.VideoLink" class="btn btn-info" role="button" target="_blank" >@s.Title</a>
+        <hr/>
+
+    }
+
+</div>
+
+
+
+@functions
+{ protected override async Task OnInitAsync()
+{
+    await GetYoutubePlaylists();
+}
+}

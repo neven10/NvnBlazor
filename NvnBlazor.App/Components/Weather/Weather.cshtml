@@ -1,0 +1,28 @@
+﻿@inherits WeatherModel
+
+
+<div>
+    <button type="button" class="btn btn-primary">
+        @weather.Location
+        <span class="badge badge-light">@weather.CurrentWeather</span>
+        <span class="badge badge-light">@weather.CurrentTemperature  C</span>
+        <span class="badge badge-light">  (  Min: @weather.MinTemperature , Max: @weather.MaxTemperature  )</span>       
+        @*<i class="oi oi-reload" onclick=""></i>*@
+
+    </button>
+</div>
+
+
+
+
+
+@functions
+
+{   
+    protected override async Task OnInitAsync()
+    {
+
+        weather = await Weather.SetWeatherAsync();
+
+    }
+}

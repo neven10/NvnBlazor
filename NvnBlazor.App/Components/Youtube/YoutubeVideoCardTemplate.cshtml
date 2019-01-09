@@ -1,0 +1,23 @@
+﻿<div class="card" style="width: 22rem;">
+    <div class="card-header" style="background: linear-gradient(to bottom, #bfbcd6 17%,#988dd7 86%,#988dd7 86%)">
+        @Title
+    </div>
+    <div class="card-body">
+        <iframe src="@YoutubeLink"></iframe>
+        
+    </div>
+</div>
+
+
+
+@functions
+{
+    [Parameter]
+    private string Title { get; set; }
+
+    [Parameter]
+    private string YoutubeLink { get; set; }
+
+
+
+}

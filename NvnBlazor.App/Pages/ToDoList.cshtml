@@ -1,0 +1,58 @@
+﻿@page "/todolist"
+@inherits ToDoListModel
+
+<h1>ToDo List</h1>
+
+<p>Test</p>
+
+<div>
+    <button type="button" class="btn btn-primary" onclick="@GetList">Manual Refresh</button>
+</div>
+
+<p></p>
+
+<div>
+    @if (todoList == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <table class="table table-bordered table-condensed">
+            <thead>
+                <tr>                    
+                    <th>Title</th>
+                    <th>Content</th>
+                    <th>Done</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var data in todoList)
+                {
+                    <tr>                        
+                        <td>@data.Title</td>
+                        <td>@data.Content</td>
+                        <td>
+                            <i class="@(data.Done ? "fas fa-check-circle": "fas fa-times-circle")"></i>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    </div>
+
+
+
+
+
+    @functions 
+{
+
+        protected override async Task OnInitAsync()
+        {
+            await GetList();
+        }
+
+}
