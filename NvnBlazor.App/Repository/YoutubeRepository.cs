@@ -46,7 +46,8 @@ namespace NvnBlazor.App.Repository
                 var PlaylistResponse = PlaylistRequest.Execute();                
                 foreach (var Video in PlaylistResponse.Items)
                 {
-                    playlist.Add(new YoutubeViewModel { Title = Video.Snippet.Title, VideoLink = "https://www.youtube.com/embed/" + Video.Snippet.ResourceId.VideoId });
+                    
+                    playlist.Add(new YoutubeViewModel { Title = Video.Snippet.Title, VideoLink = "https://www.youtube.com/embed/" + Video.Snippet.ResourceId.VideoId, ThumbnailLink = Video.Snippet.Thumbnails.Default__.Url });
                 }                
                 PageToken = PlaylistResponse.NextPageToken;
             }

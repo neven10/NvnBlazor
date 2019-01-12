@@ -9,5 +9,6 @@ namespace NvnBlazor.App.ViewModels
     {
         public string Title { get; set; }
         public string VideoLink { get; set; }
+        public string ThumbnailLink { get; set; }
     }
 }
