@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Blazor.Components;
 using Microsoft.Extensions.Options;
 using NvnBlazor.App.Interface;
-using NvnBlazor.App.Models;
+using NvnBlazor.App.DTO;
 using NvnBlazor.App.ViewModels;
 using System;
 using System.Collections.Generic;

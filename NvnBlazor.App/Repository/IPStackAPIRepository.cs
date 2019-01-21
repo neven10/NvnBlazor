@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using NvnBlazor.App.Interface;
-using NvnBlazor.App.Models;
+using NvnBlazor.App.DTO;
 using NvnBlazor.App.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -12,14 +12,14 @@ using System.Threading.Tasks;
 
 namespace NvnBlazor.App.Repository
 {
-    public class BasicInfoRepository : IBasicInfo
+    public class IPStackAPIRepository : IBasicInfo
     {
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly SettingsRoot settingsRoot;
         private readonly string apiKey;
         private readonly HttpClient httpClient;
 
-        public BasicInfoRepository(IOptions<SettingsRoot> options, HttpClient client, IHttpContextAccessor accessor)
+        public IPStackAPIRepository(IOptions<SettingsRoot> options, HttpClient client, IHttpContextAccessor accessor)
         {
             httpContextAccessor = accessor;
             httpClient = client;
@@ -30,7 +30,6 @@ namespace NvnBlazor.App.Repository
 
         public async Task<BasicInfoViewModel> SetInfoAsync()
         {
-
             var model = new BasicInfoViewModel();
             var response = await RootInfo();
             model.IPstring = response.ip;

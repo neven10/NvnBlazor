@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace NvnBlazor.App.Models
+namespace NvnBlazor.App.DTO
 {
     public class Coord
     {

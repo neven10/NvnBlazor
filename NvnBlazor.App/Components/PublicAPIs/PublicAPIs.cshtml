@@ -1,0 +1,50 @@
+﻿@inherits PublicAPIsModel
+
+
+<button class="btn btn-primary" onclick=@ShowTable>CLICK ME</button>
+<button class="btn btn-primary" onclick=@FuckU>CLICK ME</button>
+
+@foreach (var list in splitList)
+{
+   
+    <p>@list.Select(x => x.Category).FirstOrDefault()</p>
+    <TableTemplate Items="@list">
+        <TableHeader>
+            <th>API</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>HTTPS</th>
+        </TableHeader>
+        <RowTemplate>
+            <td> <a href="@context.Link">@context.API</a></td>
+            <td>@context.Description</td>
+            <td>@context.Category</td>
+            <td>@context.HTTPS</td>
+        </RowTemplate>
+
+    </TableTemplate>
+    <hr />
+    <hr />
+}
+
+@functions
+{
+
+
+
+    private async void ShowTable()
+    {
+        index = await IndexApi.SetIndexApiAsync();
+        SplitLists();
+        StateHasChanged();
+
+    }
+
+    private void FuckU()
+    {
+        splitList.Clear();
+        StateHasChanged();
+    }
+
+
+}
