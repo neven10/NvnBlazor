@@ -20,5 +20,8 @@ namespace NvnBlazor.App.Components.Youtube
         {
             YoutubeViewModelsList = await PlaylistItems.GetPlaylistItems();
         }
+
+       
+       
     }
 }

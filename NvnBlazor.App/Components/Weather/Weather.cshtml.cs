@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Blazor.Components;
 using NvnBlazor.App.Interface;
-using NvnBlazor.App.Services;
 using NvnBlazor.App.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace NvnBlazor.App.Components
+namespace NvnBlazor.App.Components.Weather
 {
     public class WeatherModel : BlazorComponent
     {

@@ -1,14 +1,11 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Blazor.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NvnBlazor.App;
-using NvnBlazor.App.Models;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Mime;
@@ -19,14 +16,12 @@ namespace NvnBlazor.Server
     {
         IConfiguration Configuration;
 
-
-
         public Startup(IHostingEnvironment env)
         {
-            using (var db = new DbNevenBlazorContext())
-            {
-                db.Database.EnsureCreated();
-            }
+            //using (var db = new DbNevenBlazorContext())
+            //{
+            //    db.Database.EnsureCreated();
+            //}
 
 
             Configuration = new ConfigurationBuilder().SetBasePath(env.ContentRootPath).AddJsonFile("appsettings.json").Build();
@@ -37,16 +32,16 @@ namespace NvnBlazor.Server
         {
             // Adds the Server-Side Blazor services, and those registered by the app project's startup.
 
-            services.AddEntityFrameworkSqlite().AddDbContext<DbNevenBlazorContext>();
-            services.AddServerSideBlazor<App.Startup>();
+           // services.AddEntityFrameworkSqlite().AddDbContext<DbNevenBlazorContext>();
+            services.AddServerSideBlazor<App.Startup>();      
 
             var appSettings = Configuration.GetSection("SettingsRoot");
             services.Configure<SettingsRoot>(appSettings);
 
-            services.AddResponseCompression(options =>
-            {
-                
+            services.AddHttpContextAccessor();
 
+            services.AddResponseCompression(options =>
+            {                
                 options.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(new[]
                 {
                     MediaTypeNames.Application.Octet,
@@ -62,10 +57,8 @@ namespace NvnBlazor.Server
 
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-            }
-
-
+                app.UseDeveloperExceptionPage();                
+            }            
             // Use component registrations and static files from the app project.
             app.UseServerSideBlazor<App.Startup>();
         }

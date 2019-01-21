@@ -3,8 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using NvnBlazor.App.Interface;
 using NvnBlazor.App.Models;
 using NvnBlazor.App.Repository;
-using NvnBlazor.App.Services;
 using NvnBlazor.App.ViewModels;
+using System.Net.Http;
 
 namespace NvnBlazor.App
 {
@@ -13,9 +13,12 @@ namespace NvnBlazor.App
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<ToDoService>();
-            services.AddScoped<IPlaylist<YoutubeViewModel>, YoutubeRepository>();
-            services.AddScoped<IWeather,OpenWeatherRepository>();
+            
+            services.AddTransient<IPlaylist<YoutubeViewModel>, YoutubeRepository>();
+            services.AddTransient<IWeather,OpenWeatherRepository>();
+            services.AddTransient<IBasicInfo, BasicInfoRepository>();
+            services.AddTransient<HttpClient>();
+
 
         }
 

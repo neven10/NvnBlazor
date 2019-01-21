@@ -50,7 +50,7 @@ namespace NvnBlazor.App.Models
         public int sunrise { get; set; }
         public int sunset { get; set; }
     }
-    public class RootWeatherObject
+    public class WeatherRootObject
     {
         public Coord coord { get; set; }
         public List<Weather> weather { get; set; }

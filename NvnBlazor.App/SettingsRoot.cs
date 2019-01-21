@@ -15,6 +15,7 @@ namespace NvnBlazor.App
     {
         public string YoutubeKey { get; set; } 
         public string WeatherKey { get; set; } 
+        public string IPKey { get; set; }
 
     }
 

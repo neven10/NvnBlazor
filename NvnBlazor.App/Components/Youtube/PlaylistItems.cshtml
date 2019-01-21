@@ -5,44 +5,47 @@
     @foreach (var item in YoutubeViewModelsList)
     {
 
-        <YoutubeVideoCardTemplate Title=@item.Title YoutubeLink=@item.VideoLink />
 
-        @*<div class="card" style="width: 12rem;" onclick="ShowVideo">
-            <div class="card-header"  style="background: linear-gradient(to bottom, #bfbcd6 17%,#988dd7 86%,#988dd7 86%)">
-               @item.Title
-            </div>
-            <div class="card-body">
-              <img class="card-img" src="@item.ThumbnailLink" />
-              @CreateDynamicComponent(item.VideoLink)
-            </div>
+        // <YoutubeVideoCardTemplate Title=@item.Title YoutubeLink=@item.VideoLink />
 
-        </div>*@
-        <hr />
+    <div class="card" style="width: 12rem;">
+        <div class="card-header" style="background: linear-gradient(to bottom, #bfbcd6 17%,#988dd7 86%,#988dd7 86%)">
+            <a href="@item.VideoLink"  target="_blank">@item.Title</a>        
+        </div>
+        <div class="card-body">
+            <img class="card-img" src="@item.ThumbnailLink" />
+        </div>        
+    </div>        
+        <hr />     
     }
 
 </div>
-
-
 @functions
+{ 
 
-{ protected override async Task OnInitAsync()
+
+    protected override async Task OnInitAsync()
     {
         await GetYoutubeVideoDetails();
-
     }
 
     //RenderFragment CreateDynamicComponent(string a) => builder =>
     //{
-    //    builder.OpenComponent(0, typeof(VideoTemplate));
-    //    builder.AddAttribute(1, "YoutubeLink", a);
-    //    builder.CloseComponent();
+
+
+    //    // builder.OpenComponent(0, typeof(VideoTemplate ));            
+    //    //builder.AddAttribute(1, "YoutubeLink",gg);
+    //    //builder.CloseComponent();
 
     //};
 
 
 
-
-
-
-
 }
+
+
+
+
+
+
+

@@ -1,0 +1,54 @@
+﻿@inherits BasicInfoModel
+
+    <form >
+
+        <div class="form-group row">
+            <button type="button" class="btn btn-outline-info btn-block btn-sm text-left ">
+                <strong>IP: </strong>
+                @info.IPstring
+            </button>
+        </div>
+        <div class="form-group row">
+            <button type="button" class="btn btn-outline-info btn-block btn-sm text-left">
+                <strong>Type: </strong>
+                @info.IPtype
+            </button>
+        </div>
+
+        <div class="form-group row">
+            <button type="button" class="btn btn-outline-info btn-block btn-sm text-left">
+                <strong>Country: </strong>
+                @info.CountryName
+            </button>
+        </div>
+        <div class="form-group row">
+
+            <button type="button" class="btn btn-outline-info btn-block btn-sm text-left">
+                <strong>City: </strong>
+                @info.City
+            </button>
+        </div>
+        <div class="form-group row">
+
+            <button type="button" class="btn btn-outline-info btn-block btn-sm text-left">
+                <strong>Zip: </strong>
+                @info.Zip
+            </button>
+        </div>
+
+        <div class="form-group row">
+
+            <button type="button" class="btn btn-outline-info btn-block btn-sm text-left">
+                <strong>Capital:</strong>
+                @info.Capital
+            </button>
+        </div>
+    </form>
+
+@functions
+{ protected override async Task OnInitAsync()
+{
+    info = await Info.SetInfoAsync();
+}
+
+}
