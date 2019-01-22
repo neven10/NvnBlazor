@@ -16,10 +16,16 @@ namespace NvnBlazor.App.Components.Youtube
 
         public List<YoutubeViewModel> YoutubeViewModelsList = new List<YoutubeViewModel>();
 
+        protected override async Task OnInitAsync()
+        {
+            await GetYoutubePlaylists();
+        }
 
         protected async Task GetYoutubePlaylists()
         {
             YoutubeViewModelsList = await Playlist.GetPlaylists();
         }
+
+
     }
 }

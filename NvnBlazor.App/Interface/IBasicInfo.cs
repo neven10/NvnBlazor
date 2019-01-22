@@ -8,6 +8,6 @@ namespace NvnBlazor.App.Interface
 {
     public interface IBasicInfo
     {
-        Task<BasicInfoViewModel> SetInfoAsync();
+        Task<BasicInfoViewModel> GetBasicInfoAsync();
     }
 }

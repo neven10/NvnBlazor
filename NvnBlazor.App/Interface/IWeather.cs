@@ -8,6 +8,6 @@ namespace NvnBlazor.App.Interface
 {
     public interface IWeather
     {
-         Task<WeatherViewModel> SetWeatherAsync();
+         Task<WeatherViewModel> GetWeatherAsync();
     }
 }

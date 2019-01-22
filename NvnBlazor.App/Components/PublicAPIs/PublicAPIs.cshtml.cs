@@ -13,19 +13,33 @@ namespace NvnBlazor.App.Components.PublicAPIs
         [Inject]
         public IIndexApi IndexApi { get; set; }
 
-        public List<IndexApiViewModel> index = new List<IndexApiViewModel>();
-        public List<List<IndexApiViewModel>> splitList = new List<List<IndexApiViewModel>>();
+       
+      
+        protected List<string> categories = new List<string>();
+        protected List<IndexApiViewModel> index = new List<IndexApiViewModel>();
+        protected List<IndexApiViewModel> category = new List<IndexApiViewModel>();
+        protected string CategoryNameLoaded { get; set; }        
 
-        public void SplitLists()
-        {            
-            //var sl = new List<List<IndexApiViewModel>>();
-            var grouping = index.GroupBy(x => x.Category).ToList();
-            foreach (var s in grouping)
-            {
-                splitList.Add(s.ToList());
-            } 
-           
+        protected bool CategoryToggleDisabled => category != null;
+
+        protected override async Task OnInitAsync()
+        {
+            categories = await IndexApi.GetCategories();
+            index = await IndexApi.GetIndexApiAsync();
+           // category = index.Where(x => x.Category == (index.Select(a => a.Category).FirstOrDefault())).ToList();
+
         }
 
-}
+
+        protected  void LoadByCategory(string s)
+        {
+            
+            category.Clear();           
+            category = index.Where(x => x.Category == s).ToList();
+            CategoryNameLoaded = category.Select(x => x.Category).FirstOrDefault();
+            StateHasChanged();
+
+        }    
+          
+    }
 }

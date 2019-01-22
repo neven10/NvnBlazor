@@ -28,7 +28,7 @@ namespace NvnBlazor.App.Repository
 
         }
 
-        public async Task<BasicInfoViewModel> SetInfoAsync()
+        public async Task<BasicInfoViewModel> GetBasicInfoAsync()
         {
             var model = new BasicInfoViewModel();
             var response = await RootInfo();

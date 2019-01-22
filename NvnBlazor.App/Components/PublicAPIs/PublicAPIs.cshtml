@@ -1,50 +1,43 @@
 ﻿@inherits PublicAPIsModel
 
 
-<button class="btn btn-primary" onclick=@ShowTable>CLICK ME</button>
-<button class="btn btn-primary" onclick=@FuckU>CLICK ME</button>
 
-@foreach (var list in splitList)
+
+@foreach (string s in categories)
+{
+    
+    <button id=@s  class="btn @((CategoryNameLoaded==s) ? "btn-info" : "btn-outline-info")"  bind="@s" onclick=@(()=>LoadByCategory(@s))> @s    
+     </button>
+}
+
+@if (CategoryToggleDisabled)
 {
    
-    <p>@list.Select(x => x.Category).FirstOrDefault()</p>
-    <TableTemplate Items="@list">
+    
+    <hr />
+    <TableTemplate Items=@category>
         <TableHeader>
             <th>API</th>
             <th>Description</th>
             <th>Category</th>
-            <th>HTTPS</th>
+            <th>Https</th>
+            <th>Cors</th>
+            <th>Auth</th>
         </TableHeader>
         <RowTemplate>
-            <td> <a href="@context.Link">@context.API</a></td>
+            <td> <a href="@context.Link" target="_blank">@context.API </a></td>
             <td>@context.Description</td>
             <td>@context.Category</td>
             <td>@context.HTTPS</td>
+            <td>@context.Cors</td>
+            <td>@context.Auth</td>
         </RowTemplate>
 
     </TableTemplate>
     <hr />
-    <hr />
-}
-
-@functions
-{
-
-
-
-    private async void ShowTable()
-    {
-        index = await IndexApi.SetIndexApiAsync();
-        SplitLists();
-        StateHasChanged();
 
     }
 
-    private void FuckU()
-    {
-        splitList.Clear();
-        StateHasChanged();
-    }
 
 
-}
+

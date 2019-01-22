@@ -17,6 +17,9 @@ namespace NvnBlazor.App.Components.BasicInfo
 
         public BasicInfoViewModel info = new BasicInfoViewModel();
 
-
-}
+        protected override async Task OnInitAsync()
+        {
+            info = await Info.GetBasicInfoAsync();
+        }
+    }
 }

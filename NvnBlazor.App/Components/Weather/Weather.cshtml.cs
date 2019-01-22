@@ -17,5 +17,12 @@ namespace NvnBlazor.App.Components.Weather
        public WeatherViewModel weather = new WeatherViewModel();
 
 
+
+        protected override async Task OnInitAsync()
+        {
+
+            weather = await Weather.GetWeatherAsync();
+
+        }
     }
 }

@@ -8,6 +8,8 @@ namespace NvnBlazor.App.Interface
 {
     public interface IIndexApi
     {
-        Task<List<IndexApiViewModel>> SetIndexApiAsync();
+        Task<List<IndexApiViewModel>> GetIndexApiAsync();
+        Task<List<IndexApiViewModel>> GetIndexApiAsync(string category);
+        Task<List<string>> GetCategories();
     }
 }

@@ -27,7 +27,7 @@ namespace NvnBlazor.App.Repository
     
         }
 
-        public async Task<WeatherViewModel> SetWeatherAsync()
+        public async Task<WeatherViewModel> GetWeatherAsync()
         {
             var weather = new WeatherViewModel();
             var response = await RootWeather();

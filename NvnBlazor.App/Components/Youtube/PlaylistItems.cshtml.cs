@@ -21,7 +21,20 @@ namespace NvnBlazor.App.Components.Youtube
             YoutubeViewModelsList = await PlaylistItems.GetPlaylistItems();
         }
 
-       
-       
+        protected override async Task OnInitAsync()
+        {
+            await GetYoutubeVideoDetails();
+        }
+
+        //RenderFragment CreateDynamicComponent(string a) => builder =>
+        //{
+
+
+        //    // builder.OpenComponent(0, typeof(VideoTemplate ));            
+        //    //builder.AddAttribute(1, "YoutubeLink",gg);
+        //    //builder.CloseComponent();
+
+        //};
+
     }
 }
