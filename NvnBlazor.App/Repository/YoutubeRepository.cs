@@ -14,14 +14,14 @@ namespace NvnBlazor.App.Repository
     public class YoutubeRepository : IPlaylist<YoutubeViewModel>
     {
         private readonly SettingsRoot settingsRoot;
-        private readonly string apiKey;
+        private readonly string youtubeApiKey;
         private readonly string channelId;
         private readonly string playlistId;
 
         public YoutubeRepository(IOptions<SettingsRoot> options)
         {
             settingsRoot = options.Value;
-            apiKey = settingsRoot.APIKeys.YoutubeKey;
+            youtubeApiKey = settingsRoot.APIKeys.YoutubeKey;
             channelId = settingsRoot.Misc.YoutubeChannelId;
             playlistId = settingsRoot.Misc.YoutubePlaylistId;
         }

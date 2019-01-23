@@ -9,5 +9,6 @@ namespace NvnBlazor.App.Interface
     public interface IBasicInfo
     {
         Task<BasicInfoViewModel> GetBasicInfoAsync();
+        string GetClientIP();
     }
 }

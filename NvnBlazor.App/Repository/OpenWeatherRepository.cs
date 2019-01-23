@@ -16,15 +16,22 @@ namespace NvnBlazor.App.Repository
     public class OpenWeatherRepository : IWeather
     {
         private readonly SettingsRoot settingsRoot;
-        private readonly string apiKey;
+        private readonly string openWeatherApiKey;
         private readonly HttpClient httpClient;
+        private readonly IBasicInfo  _basicInfo;
+        private readonly string ipStackApiKey;
 
-        public OpenWeatherRepository(IOptions<SettingsRoot> options, HttpClient client)
+       
+
+        public OpenWeatherRepository(IOptions<SettingsRoot> options, HttpClient client, IBasicInfo  basicInfo)
         {
             settingsRoot = options.Value;
-            apiKey = settingsRoot.APIKeys.WeatherKey;
+            openWeatherApiKey = settingsRoot.APIKeys.WeatherKey;
             httpClient = client;
-    
+            _basicInfo = basicInfo;
+            ipStackApiKey = settingsRoot.APIKeys.IPKey;
+
+
         }
 
         public async Task<WeatherViewModel> GetWeatherAsync()
@@ -42,17 +49,20 @@ namespace NvnBlazor.App.Repository
 
         private async Task<WeatherRootObject> RootWeather()
         {
-            //HttpClient client = new HttpClient();
-            WeatherRootObject rootWeatherObject = await httpClient.GetJsonAsync<WeatherRootObject>("http://api.openweathermap.org/data/2.5/weather?q=Bijeljina&units=metric&APPID="+apiKey+"");
+            string city = await GetCurrentCity();
+            WeatherRootObject rootWeatherObject = await httpClient.GetJsonAsync<WeatherRootObject>("http://api.openweathermap.org/data/2.5/weather?q="+city+"+&units=metric&APPID="+openWeatherApiKey+"");
             return rootWeatherObject;
         }
 
-        //private async string GetCurrentCity()
-        //{
-        //    HttpClient client = new HttpClient();
-        //    BasicInfoRootObject info = await client.GetJsonAsync<BasicInfoRootObject>("http://api.ipstack.com/77.239.88.101?access_key=" + apiKey + "");
-        //    // BasicInfoRootObject info = await client.GetJsonAsync<BasicInfoRootObject>("http://api.ipstack.com/" +GetClientIP()+ "?access_key=" + apiKey + "");
-        //    return "s";
-        //}
+        private async Task<string> GetCurrentCity()
+        {
+            string clientIp = _basicInfo.GetClientIP();
+            var ipApiKey = settingsRoot.APIKeys.IPKey;
+            BasicInfoRootObject info = await httpClient.GetJsonAsync<BasicInfoRootObject>("http://api.ipstack.com/" + clientIp + "?access_key=" + ipStackApiKey + "");
+            string city = info.city;
+            return (!string.IsNullOrWhiteSpace(city)) ? city : "Belgrade";       
+        }
+
+
     }
 }

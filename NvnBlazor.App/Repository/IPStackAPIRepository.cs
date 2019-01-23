@@ -16,7 +16,7 @@ namespace NvnBlazor.App.Repository
     {
         private readonly IHttpContextAccessor httpContextAccessor;
         private readonly SettingsRoot settingsRoot;
-        private readonly string apiKey;
+        private readonly string ipStackApiKey;
         private readonly HttpClient httpClient;
 
         public IPStackAPIRepository(IOptions<SettingsRoot> options, HttpClient client, IHttpContextAccessor accessor)
@@ -24,7 +24,7 @@ namespace NvnBlazor.App.Repository
             httpContextAccessor = accessor;
             httpClient = client;
             settingsRoot = options.Value;
-            apiKey = settingsRoot.APIKeys.IPKey;
+            ipStackApiKey = settingsRoot.APIKeys.IPKey;
 
         }
 
@@ -45,18 +45,15 @@ namespace NvnBlazor.App.Repository
 
         private async Task<BasicInfoRootObject> RootInfo()
         {
-            //BasicInfoRootObject info = await httpClient.GetJsonAsync<BasicInfoRootObject>("http://api.ipstack.com/77.239.88.101?access_key=" + apiKey + "");
-             BasicInfoRootObject info = await httpClient.GetJsonAsync<BasicInfoRootObject>("http://api.ipstack.com/" +GetClientIP()+ "?access_key=" + apiKey + "");            
+            var clientIp = GetClientIP();
+            BasicInfoRootObject info = await httpClient.GetJsonAsync<BasicInfoRootObject>("http://api.ipstack.com/" +clientIp+ "?access_key=" + ipStackApiKey + "");            
             return info;
         }
 
-        private string GetClientIP()
+        public string GetClientIP()
         {
-            string ip = httpContextAccessor.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
-            if (ip == "0.0.0.1")
-                return "77.239.88.101";
-            else
-                return ip;
+            string ip =  httpContextAccessor.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();            
+            return (ip == "0.0.0.1") ? "77.239.88.101" : ip;
         }
     }
 }
