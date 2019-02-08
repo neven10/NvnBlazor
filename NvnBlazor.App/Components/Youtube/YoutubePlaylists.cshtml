@@ -3,7 +3,7 @@
 <div class="d-flex flex-fill ">
     @foreach (var s in YoutubeViewModelsList)
     {
-        <a href="@s.VideoLink" class="btn btn-info btn-block" role="button" target="_blank" >@s.Title</a>
+        <a href="@s.VideoLink" class="btn btn-info btn-block" role="button" target="_blank" onclick=@(()=>LoadByPlaylist())>@s.Title</a>
      
     }
 

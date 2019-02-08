@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Blazor;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
-using NvnBlazor.App.Interface;
 using NvnBlazor.App.DTO;
+using NvnBlazor.App.Interface;
 using NvnBlazor.App.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+
+
 
 namespace NvnBlazor.App.Repository
 {
@@ -25,7 +24,6 @@ namespace NvnBlazor.App.Repository
             httpClient = client;
             settingsRoot = options.Value;
             ipStackApiKey = settingsRoot.APIKeys.IPKey;
-
         }
 
         public async Task<BasicInfoViewModel> GetBasicInfoAsync()
@@ -52,7 +50,7 @@ namespace NvnBlazor.App.Repository
 
         public string GetClientIP()
         {
-            string ip =  httpContextAccessor.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();            
+            string ip =  httpContextAccessor.HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();                        
             return (ip == "0.0.0.1") ? "77.239.88.101" : ip;
         }
     }

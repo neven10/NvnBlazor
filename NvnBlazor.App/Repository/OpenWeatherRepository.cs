@@ -1,11 +1,8 @@
-﻿using Microsoft.AspNetCore.Blazor;
-using Microsoft.AspNetCore.Blazor.Components;
+﻿using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.Options;
-using NvnBlazor.App.Interface;
 using NvnBlazor.App.DTO;
+using NvnBlazor.App.Interface;
 using NvnBlazor.App.ViewModels;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -50,7 +47,7 @@ namespace NvnBlazor.App.Repository
         private async Task<WeatherRootObject> RootWeather()
         {
             string city = await GetCurrentCity();
-            WeatherRootObject rootWeatherObject = await httpClient.GetJsonAsync<WeatherRootObject>("http://api.openweathermap.org/data/2.5/weather?q="+city+"+&units=metric&APPID="+openWeatherApiKey+"");
+            var rootWeatherObject = await httpClient.GetJsonAsync<WeatherRootObject>("http://api.openweathermap.org/data/2.5/weather?q=" + city + "+&units=metric&APPID=" + openWeatherApiKey + "");
             return rootWeatherObject;
         }
 

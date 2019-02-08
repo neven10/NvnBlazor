@@ -1,5 +1,4 @@
-using Microsoft.AspNetCore.Blazor.Components;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Components;
 using NvnBlazor.App.Interface;
 using NvnBlazor.App.ViewModels;
 using System;
@@ -10,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NvnBlazor.App.Components.BasicInfo
 {
-    public class BasicInfoModel : BlazorComponent
+    public class BasicInfoModel : ComponentBase
     {
         [Inject]
         protected IBasicInfo Info { get; set; }

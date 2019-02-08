@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Blazor;
+﻿using Microsoft.AspNetCore.Components;
 using NvnBlazor.App.DTO;
 using NvnBlazor.App.Interface;
 using NvnBlazor.App.ViewModels;
@@ -47,13 +47,13 @@ namespace NvnBlazor.App.Repository
 
         private async Task<IndexApiRootobject> GetRootobject()
         {
-            var index = await httpClient.GetJsonAsync<IndexApiRootobject>("https://api.publicapis.org/entries");
+            IndexApiRootobject index = await httpClient.GetJsonAsync<IndexApiRootobject>("https://api.publicapis.org/entries");
             return index;
         }
 
         private async Task<IndexApiRootobject> GetRootobject(string category)
         {
-            var index = await httpClient.GetJsonAsync<IndexApiRootobject>("https://api.publicapis.org/entries?category="+category+"");
+            IndexApiRootobject index = await httpClient.GetJsonAsync<IndexApiRootobject>("https://api.publicapis.org/entries?category=" + category + "");
             return index;
         }
 

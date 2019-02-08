@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Blazor.Components;
+using Microsoft.AspNetCore.Components;
 using NvnBlazor.App.Interface;
 using NvnBlazor.App.ViewModels;
 using System;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NvnBlazor.App.Components.Weather
 {
-    public class WeatherModel : BlazorComponent
+    public class WeatherModel : ComponentBase
     {
        [Inject]
        protected IWeather Weather { get; set; }

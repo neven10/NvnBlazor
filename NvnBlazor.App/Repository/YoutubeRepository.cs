@@ -9,6 +9,7 @@ using Microsoft.Extensions.Options;
 using NvnBlazor.App.Interface;
 using NvnBlazor.App.ViewModels;
 
+
 namespace NvnBlazor.App.Repository
 {
     public class YoutubeRepository : IPlaylist<YoutubeViewModel>
@@ -53,8 +54,6 @@ namespace NvnBlazor.App.Repository
             }
             return playlist;
         }
-
-
 
         public async Task<List<YoutubeViewModel>> GetPlaylists()
         {

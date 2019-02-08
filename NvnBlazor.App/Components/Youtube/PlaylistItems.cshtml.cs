@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Blazor.Components;
+using Microsoft.AspNetCore.Components;
 using NvnBlazor.App.Interface;
 using NvnBlazor.App.ViewModels;
 using System;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NvnBlazor.App.Components.Youtube
 {
-    public class PlaylistItemsModel : BlazorComponent
+    public class PlaylistItemsModel : ComponentBase
     {
         [Inject]
         IPlaylist<YoutubeViewModel> PlaylistItems { get; set; }
