@@ -1,0 +1,77 @@
+﻿@using NvnBlazor.ComponentTemplates
+
+@foreach (string s in categories)
+{
+
+<button id=@s class="btn @((CategoryNameLoaded==s) ? "btn-info" : "btn-outline-info")" bind="@s" onclick=@(()=>LoadByCategory(@s))>
+    @s
+</button>
+}
+
+@if (CategoryToggleDisabled)
+{
+
+
+<hr />
+<TableTemplate Items=@categoryFilter>
+    <TableHeader>
+        <th>API</th>
+        <th>Description</th>
+        <th>Category</th>
+        <th>Https</th>
+        <th>Cors</th>
+        <th>Auth</th>
+    </TableHeader>
+    <RowTemplate>
+        <td> <a href="@context.Link" target="_blank">@context.API </a></td>
+            <td>@context.Description</td>
+            <td>@context.Category</td>
+            <td>@context.HTTPS</td>
+            <td>@context.Cors</td>
+            <td>@context.Auth</td>
+    </RowTemplate>
+
+</TableTemplate>
+<hr />
+
+}
+
+
+
+@functions
+{
+        [Inject]
+        public IIndexApi IndexApi { get; set; }
+        protected List<string> categories = new List<string>();
+        protected List<IndexApiViewModel> index = new List<IndexApiViewModel>();
+        protected List<IndexApiViewModel> categoryFilter = new List<IndexApiViewModel>();
+        protected string CategoryNameLoaded { get; set; }
+        protected bool CategoryToggleDisabled => categoryFilter != null;
+
+     protected override async Task OnInitAsync()
+        {
+
+            categories = await IndexApi.GetCategories();
+
+
+            index = await IndexApi.GetIndexApiAsync();
+
+
+            // category = index.Where(x => x.Category == (index.Select(a => a.Category).FirstOrDefault())).ToList();
+
+        }
+
+         protected void LoadByCategory(string s)
+         {
+
+            categoryFilter.Clear();
+            categoryFilter = index.Where(x => x.Category == s).ToList();
+            CategoryNameLoaded = categoryFilter.Select(x => x.Category).FirstOrDefault();
+            StateHasChanged();
+
+        }
+}
+
+
+
+
